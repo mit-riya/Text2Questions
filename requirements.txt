@@ -3,3 +3,8 @@ transformers
 nltk 
 torch
 keybert
+benepar
+IPython.display
+re
+scipy
+summa
