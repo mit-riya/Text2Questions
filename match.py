@@ -101,15 +101,15 @@ def get_option(options,find_word,find_sen):
       tokenized_text, tokens_tensor, segments_tensors = bert_text_preparation(text.lower(), tokenizer)
       list_token_embeddings = get_bert_embeddings(tokens_tensor, segments_tensors, model)
       
-      # Find the position 'bank' in list of tokens
+      # Find the position of find_word in list of tokens
       word_index = tokenized_text.index(find_word)
-      # Get the embedding for bank
+      # Get the embedding for find_word
       word_embedding = list_token_embeddings[word_index]
 
       target_word_embeddings.append(word_embedding)
     list_of_distances = []
     # Calculating the distance between the
-    # embeddings of 'bank' in all the
+    # embeddings of find_word in all the
     # given contexts of the word
     for text1, embed1 in zip(find_sen, target_word_embeddings):
       for text2, embed2 in zip(options, target_word_embeddings):
@@ -143,7 +143,7 @@ def get_mcq(paragraph):
         options.append(syn.definition())
       sentences=[]
       sentences=sent_tokenize(paragraph)
-      find_sen=[]
+      find_sen=[]        # sentences from text with the given word
       for i in sentences:
         fl=0
         if find_word in i.lower():
