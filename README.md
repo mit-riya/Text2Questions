@@ -7,9 +7,8 @@ Generates true or false and match the following questions from a given text usin
 * wordnet for getting word meanings
 * Berkely Neural parser for constituency parsing
 
-<img src="github.com/mit-riya/Text2Questions/assets/95142933/667715fb-0b22-4905-884b-952dc5f39c66" width="1250" height="500">
+
+![WhatsApp Image 2023-11-03 at 12 03 33 AM (1)](https://github.com/mit-riya/Text2Questions/assets/95142933/30a88812-ebfd-4d85-8da8-a9e7f1825342)
 
 
-<img src="github.com/mit-riya/Text2Questions/assets/95142933/fd6c6683-40cb-4c2a-b821-00e0ea31c7a6" width="1250" height="500">
-
-
+![WhatsApp Image 2023-11-03 at 12 03 33 AM](https://github.com/mit-riya/Text2Questions/assets/95142933/bc185497-24e4-4feb-ac75-5063d25a7182)
