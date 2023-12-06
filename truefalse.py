@@ -9,7 +9,7 @@ from transformers import GPT2LMHeadModel, GPT2Tokenizer
 from sentence_transformers import SentenceTransformer
 import benepar
 from IPython.display import Markdown, display
-import re
+import re    # provide regular expression matching operations 
 from string import punctuation
 import scipy
 from nltk import tokenize
@@ -42,6 +42,7 @@ def read_file(file_path):
 
 
 def preprocess(sentences):
+    # remove sentences with qoutes and question marks
     output = []
     for sent in sentences:
         single_quotes_present = len(re.findall(
@@ -57,10 +58,11 @@ def preprocess(sentences):
 
 
 def get_candidate_sents(resolved_text, ratio=0.3):
+    # The ratio parameter controls the length of the summary by specifying the ratio of sentences to keep
     candidate_sents = summarize(resolved_text, ratio=ratio)
     candidate_sents_list = tokenize.sent_tokenize(candidate_sents)
     candidate_sents_list = [re.split(r'[:;]+', x)[0]
-                            for x in candidate_sents_list]
+                            for x in candidate_sents_list]   # for splitting compound sentences
     # Remove very short sentences less than 30 characters and long sentences greater than 150 characters
     filtered_list_short_sentences = [
         sent for sent in candidate_sents_list if len(sent) > 30 and len(sent) < 150]
@@ -68,6 +70,7 @@ def get_candidate_sents(resolved_text, ratio=0.3):
 
 
 def get_termination_portion(main_string, sub_string):
+    # finds substring of main_string termination with sub_string
     combined_sub_string = sub_string.replace(" ", "")
     main_string_list = main_string.split()
     last_index = len(main_string_list)
@@ -82,6 +85,7 @@ def get_termination_portion(main_string, sub_string):
 
 
 def get_flattened(t):
+    # combines leaves of tree t to form a string
     sent_str_final = None
     if t is not None:
         sent_str = [" ".join(x.leaves()) for x in list(t)]
@@ -105,7 +109,7 @@ def get_right_most_VP_or_NP(parse_tree, last_NP=None, last_VP=None):
 def get_sentence_completions(filter_quotes_and_questions):
     sentence_completion_dict = {}
     for individual_sentence in filter_quotes_and_questions:
-        sentence = individual_sentence.rstrip('?:!.,;')
+        sentence = individual_sentence.rstrip('?:!.,;')  # remove trailing punctuation characters
         tree = benepar_parser.parse(sentence)
         last_nounphrase, last_verbphrase = get_right_most_VP_or_NP(tree)
         phrases = []
